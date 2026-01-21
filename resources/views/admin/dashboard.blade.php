@@ -2,77 +2,71 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Admin Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-[#2e2e2e] text-white">
+<body class="bg-gray-100">
 
-<!-- TOP INFO -->
-<div class="bg-black text-center text-sm py-2">
-    Halo Sobat! Selamat datang di Website Kami
-</div>
+<div class="flex">
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-gray-800 text-white min-h-screen p-4">
+    <h2 class="text-xl font-bold mb-6">ADMIN SITEPAT</h2>
 
-<!-- NAVBAR -->
-<nav class="flex items-center justify-between px-10 py-4 bg-[#3a3a3a]">
-    <div class="text-2xl font-bold text-orange-500">
-        SI<span class="text-white">TEPAT</span>
-    </div>
-
-    <ul class="flex gap-8 font-semibold">
-        <li><a href="#" class="hover:text-orange-400">Beranda</a></li>
-        <li><a href="#" class="hover:text-orange-400">Produk</a></li>
-        <li><a href="#" class="hover:text-orange-400">Service</a></li>
-        <li><a href="#" class="hover:text-orange-400">Outlet Kami</a></li>
-    </ul>
-</nav>
-
-
-<!-- LOGOUT -->
+    <ul class="space-y-2">
         <li>
-            <form action="{{ route('admin.logout') }}" method="POST">
-                @csrf
-                <button
-                    type="submit"
-                    class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-white font-semibold"
-                >
-                    Logout
-                </button>
-            </form>
+            <a href="{{ route('admin.dashboard') }}"
+               class="block p-2 hover:bg-gray-700 rounded">
+                Dashboard
+            </a>
         </li>
-        
 
-<!-- HERO -->
-<section class="relative bg-[#1f1f1f] px-10 py-16">
-    <h1 class="text-4xl font-extrabold mb-4">
-        Promo Terbaik Hari Ini
-    </h1>
-    <p class="text-gray-300 mb-8">
-        Dapatkan layanan & produk terbaik dengan harga spesial
-    </p>
+        <li>
+            <a href="{{ route('admin.kategori.index') }}"
+               class="block p-2 hover:bg-gray-700 rounded">
+                Kategori
+            </a>
+        </li>
 
-    <!-- PROMO CARDS -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-black p-6 rounded-xl border-l-8 border-orange-500">
-            <h3 class="text-orange-400 text-xl font-bold">PROMO BAN</h3>
-            <p class="text-4xl font-extrabold mt-4">150RB*</p>
+        <li>
+            <a href="{{ route('admin.produk.index') }}"
+               class="block p-2 hover:bg-gray-700 rounded">
+                Produk
+            </a>
+
+            <a href="{{ route('admin.outlet.index') }}"
+               class="block p-2 hover:bg-gray-700 rounded">
+                Outlet
+            </a>
+        </li>
+    </ul>
+
+    <!-- LOGOUT -->
+    <form action="{{ route('admin.logout') }}" method="POST" class="mt-6">
+        @csrf
+        <button type="submit"
+            class="w-full p-2 bg-red-600 hover:bg-red-700 rounded">
+            Logout
+        </button>
+    </form>
+</aside>
+
+
+    <!-- CONTENT -->
+    <main class="flex-1 p-6">
+        <h1 class="text-2xl font-bold mb-4">Dashboard Admin</h1>
+
+        <div class="grid grid-cols-3 gap-4">
+            <div class="bg-white p-4 rounded shadow">
+                <h3 class="text-gray-500">Total Kategori</h3>
+                <p class="text-2xl font-bold">10</p>
+            </div>
+            <div class="bg-white p-4 rounded shadow">
+                <h3 class="text-gray-500">Total Produk</h3>
+                <p class="text-2xl font-bold">25</p>
+            </div>
         </div>
-
-        <div class="bg-black p-6 rounded-xl border-l-8 border-orange-500">
-            <h3 class="text-orange-400 text-xl font-bold">PROMO OLI</h3>
-            <p class="text-4xl font-extrabold mt-4">49RB*</p>
-        </div>
-
-        <div class="bg-black p-6 rounded-xl border-l-8 border-orange-500">
-            <h3 class="text-orange-400 text-xl font-bold">PROMO AKI</h3>
-            <p class="text-4xl font-extrabold mt-4">175RB*</p>
-        </div>
-    </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="bg-black py-6 text-center text-gray-400 text-sm">
-    © {{ date('Y') }} SiTepat Digital Motoshop
-</footer>
+    </main>
+</div>
 
 </body>
 </html>

@@ -5,70 +5,93 @@
     <title>Register Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 flex justify-center items-center h-screen">
 
-<form method="POST" action="{{ route('admin.register') }}" class="bg-white p-6 rounded w-96">
-    @csrf
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 flex items-center justify-center">
 
-    <h2 class="text-xl font-bold mb-4 text-center">Register Admin</h2>
+    <div class="w-full max-w-md">
+        <!-- CARD -->
+        <div class="bg-white/95 backdrop-blur rounded-2xl shadow-2xl p-8">
 
-    <!-- NAMA -->
-    <input type="text"
-           name="name"
-           placeholder="Nama Lengkap"
-           value="{{ old('name') }}"
-           class="w-full mb-3 p-2 border rounded"
-           required>
+            <!-- HEADER -->
+            <div class="text-center mb-8">
+                <div class="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-full bg-green-600 text-white text-xl font-bold">
+                    A
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800">Register Admin</h2>
+                <p class="text-sm text-gray-500">Buat akun admin baru</p>
+            </div>
 
-    @error('name')
-        <p class="text-red-500 text-sm mb-2">{{ $message }}</p>
-    @enderror
+            <!-- FORM -->
+            <form method="POST" action="{{ route('admin.register') }}" class="space-y-4">
+                @csrf
 
-    <!-- EMAIL -->
-    <input type="email"
-           name="email"
-           placeholder="Email"
-           value="{{ old('email') }}"
-           class="w-full mb-3 p-2 border rounded"
-           required>
+                <!-- NAMA -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-600 mb-1">Nama Lengkap</label>
+                    <input type="text" name="name" value="{{ old('name') }}"
+                        placeholder="Nama Lengkap"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                        required>
+                    @error('name')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
 
-    @error('email')
-        <p class="text-red-500 text-sm mb-2">{{ $message }}</p>
-    @enderror
+                <!-- EMAIL -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-600 mb-1">Email</label>
+                    <input type="email" name="email" value="{{ old('email') }}"
+                        placeholder="admin@email.com"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                        required>
+                    @error('email')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
 
-    <!-- PASSWORD -->
-    <input type="password"
-           name="password"
-           placeholder="Password"
-           class="w-full mb-3 p-2 border rounded"
-           required>
+                <!-- PASSWORD -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-600 mb-1">Password</label>
+                    <input type="password" name="password"
+                        placeholder="••••••••"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                        required>
+                    @error('password')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
 
-    @error('password')
-        <p class="text-red-500 text-sm mb-2">{{ $message }}</p>
-    @enderror
+                <!-- KONFIRMASI PASSWORD -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-600 mb-1">Konfirmasi Password</label>
+                    <input type="password" name="password_confirmation"
+                        placeholder="••••••••"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                        required>
+                </div>
 
-    <!-- KONFIRMASI PASSWORD -->
-    <input type="password"
-           name="password_confirmation"
-           placeholder="Konfirmasi Password"
-           class="w-full mb-4 p-2 border rounded"
-           required>
+                <!-- BUTTON -->
+                <button
+                    class="w-full bg-green-600 hover:bg-green-700 text-white py-2.5 rounded-lg font-semibold transition">
+                    Daftar
+                </button>
+            </form>
 
-    <!-- BUTTON REGISTER -->
-    <button class="bg-green-600 hover:bg-green-700 text-white w-full py-2 rounded font-semibold">
-        Daftar
-    </button>
+            <!-- LOGIN LINK -->
+            <p class="text-center text-sm text-gray-600 mt-6">
+                Sudah punya akun?
+                <a href="{{ route('admin.login') }}"
+                   class="text-blue-600 hover:underline font-semibold">
+                    Login
+                </a>
+            </p>
+        </div>
 
-    <!-- LINK KE LOGIN -->
-    <p class="text-center text-sm text-gray-600 mt-4">
-        Sudah punya akun?
-        <a href="{{ route('admin.login') }}"
-           class="text-blue-600 hover:underline font-semibold">
-            Login
-        </a>
-    </p>
-
-</form>
+        <!-- FOOTER -->
+        <p class="text-center text-xs text-gray-400 mt-6">
+            © {{ date('Y') }} Admin Panel
+        </p>
+    </div>
 
 </body>
 </html>

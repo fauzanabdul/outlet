@@ -2,54 +2,60 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\OutletController;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| PUBLIC (USER)
 |--------------------------------------------------------------------------
 */
-
-//
-// ======================
-// PUBLIC (USER / VISITOR)
-// ======================
-//
-Route::get('/', function () {
-    return view('dashboard'); // beranda
-});
-
+Route::get('/', fn () => view('dashboard'))->name('home');
 Route::get('/produk', fn () => view('produk'));
 Route::get('/service', fn () => view('service'));
 Route::get('/outlet', fn () => view('outlet'));
 
+/*
+|--------------------------------------------------------------------------
+| ADMIN AUTH (LOGIN, REGISTER, LOGOUT)
+|--------------------------------------------------------------------------
+*/
+Route::prefix('admin')->name('admin.')->group(function () {
 
-//
-// ======================
-// ADMIN ONLY
-// ======================
-//
-Route::prefix('admin')->group(function () {
-
-    // LOGIN ADMIN
-    Route::get('/login', [AdminAuthController::class, 'showLogin'])
-        ->name('admin.login');
-
+    // LOGIN
+    Route::get('/login', [AdminAuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AdminAuthController::class, 'login']);
 
-    // LOGOUT ADMIN
-    Route::post('/logout', [AdminAuthController::class, 'logout'])
-        ->name('admin.logout');
+    // REGISTER
+    Route::get('/register', [AdminAuthController::class, 'showRegister'])->name('register');
+    Route::post('/register', [AdminAuthController::class, 'register']);
 
-    // DASHBOARD ADMIN (PROTECTED)
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })
-    ->middleware('auth:admin')
-    ->name('admin.dashboard');
-
+    // LOGOUT ✅ (SATU KALI SAJA)
+    Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 });
-    // REGISTER ADMIN
-    Route::get('/register', [AdminAuthController::class, 'showRegister'])
-        ->name('admin.register');
 
-    Route::post('/register', [AdminAuthController::class, 'register']);   
+/*
+|--------------------------------------------------------------------------
+| ADMIN PROTECTED
+|--------------------------------------------------------------------------
+*/
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware('auth:admin')
+    ->group(function () {
+
+        // DASHBOARD ADMIN
+        Route::get('/dashboard', fn () => view('admin.dashboard'))
+            ->name('dashboard');
+
+        // KATEGORI
+        Route::resource('kategori', KategoriController::class);
+
+        // PRODUK
+        Route::resource('produk', ProdukController::class);
+    });
+
+       //OUTLET
+       Route::resource('outlet', OutletController::class)
+    ->names('admin.outlet');
