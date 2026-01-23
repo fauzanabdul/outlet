@@ -2,58 +2,97 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Outlet;
 use Illuminate\Http\Request;
 
 class OutletController extends Controller
 {
-    /**
-     * Tampilkan daftar outlet
-     */
     public function index()
     {
-        return view('admin.outlet.index');
+        $outlets = Outlet::all();
+        return view('admin.outlet.index', compact('outlets'));
     }
 
-    /**
-     * Tampilkan form tambah outlet
-     */
     public function create()
     {
         return view('admin.outlet.create');
     }
 
-    /**
-     * Simpan data outlet
-     */
     public function store(Request $request)
     {
-        // nanti isi kalau outlet sudah ada tabelnya
-        return back();
+        $request->validate([
+            'gambar'      => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'nama_outlet' => 'required',
+            'alamat'      => 'required',
+            'no_telp'     => 'required',
+        ]);
+
+        $gambar = $request->file('gambar');
+        $namaGambar = time().'_'.$gambar->getClientOriginalName();
+        $gambar->move(public_path('uploads/outlet'), $namaGambar);
+
+        Outlet::create([
+            'gambar'      => $namaGambar,
+            'nama_outlet' => $request->nama_outlet,
+            'alamat'      => $request->alamat,
+            'no_telp'     => $request->no_telp,
+        ]);
+
+        return redirect()->route('admin.outlet.index')
+            ->with('success', 'Outlet berhasil ditambahkan');
     }
 
-    /**
-     * Tampilkan form edit outlet
-     */
+    // ================== EDIT ==================
     public function edit($id)
     {
-        return view('admin.outlet.edit');
+        $outlet = Outlet::findOrFail($id);
+        return view('admin.outlet.edit', compact('outlet'));
     }
 
-    /**
-     * Update data outlet
-     */
+    // ================== UPDATE ==================
     public function update(Request $request, $id)
     {
-        // nanti isi
-        return back();
+        $outlet = Outlet::findOrFail($id);
+
+        $request->validate([
+            'nama_outlet' => 'required',
+            'alamat'      => 'required',
+            'no_telp'     => 'required',
+            'gambar'      => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        if ($request->hasFile('gambar')) {
+            if ($outlet->gambar && file_exists(public_path('uploads/outlet/'.$outlet->gambar))) {
+                unlink(public_path('uploads/outlet/'.$outlet->gambar));
+            }
+
+            $gambar = $request->file('gambar');
+            $namaGambar = time().'_'.$gambar->getClientOriginalName();
+            $gambar->move(public_path('uploads/outlet'), $namaGambar);
+
+            $outlet->gambar = $namaGambar;
+        }
+
+        $outlet->update([
+            'nama_outlet' => $request->nama_outlet,
+            'alamat'      => $request->alamat,
+            'no_telp'     => $request->no_telp,
+        ]);
+
+        return redirect()->route('admin.outlet.index')
+            ->with('success', 'Outlet berhasil diupdate');
     }
 
-    /**
-     * Hapus outlet
-     */
-    public function destroy($id)
+    // ================== DELETE ==================
+    public function destroy(Outlet $outlet)
     {
-        // nanti isi
-        return back();
+        if ($outlet->gambar && file_exists(public_path('uploads/outlet/'.$outlet->gambar))) {
+            unlink(public_path('uploads/outlet/'.$outlet->gambar));
+        }
+
+        $outlet->delete();
+
+        return redirect()->route('admin.outlet.index')
+            ->with('success', 'Outlet berhasil dihapus');
     }
 }

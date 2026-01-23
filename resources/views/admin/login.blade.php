@@ -2,72 +2,181 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body class="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 flex items-center justify-center">
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4">
 
     <div class="w-full max-w-md">
         <!-- CARD -->
-        <div class="bg-white/95 backdrop-blur rounded-2xl shadow-2xl p-8">
-
-            <!-- HEADER -->
-            <div class="text-center mb-8">
-                <div class="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-full bg-blue-600 text-white text-xl font-bold">
-                    A
+        <div class="bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl shadow-slate-900/30 p-8 border border-slate-200/20">
+            
+            <!-- ANIMATED HEADER -->
+            <div class="text-center mb-10">
+                <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-2xl font-bold shadow-lg shadow-blue-500/30 animate-pulse-slow">
+                    <i class="fas fa-lock"></i>
                 </div>
-                <h2 class="text-2xl font-bold text-gray-800">Admin Login</h2>
-                <p class="text-sm text-gray-500">Masuk ke dashboard admin</p>
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Admin Login</h1>
+                <p class="text-sm text-gray-500 font-medium">Masuk ke dashboard administrasi</p>
             </div>
 
             <!-- FORM -->
-            <form method="POST" action="{{ route('admin.login') }}" class="space-y-5">
+            <form method="POST" action="{{ route('admin.login') }}" class="space-y-6">
                 @csrf
 
                 <!-- EMAIL -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-600 mb-1">Email</label>
-                    <input type="email" name="email" placeholder="admin@email.com"
-                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
-                        required>
+                <div class="group">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                        <i class="fas fa-envelope mr-2 text-blue-500"></i>Alamat Email
+                    </label>
+                    <div class="relative">
+                        <input type="email" name="email" placeholder="admin@example.com"
+                            class="w-full px-4 py-3 pl-11 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 group-hover:border-blue-400"
+                            required autocomplete="email" autofocus>
+                        <i class="fas fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
                 </div>
 
                 <!-- PASSWORD -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-600 mb-1">Password</label>
-                    <input type="password" name="password" placeholder="••••••••"
-                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
-                        required>
+                <div class="group">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                        <i class="fas fa-key mr-2 text-blue-500"></i>Kata Sandi
+                    </label>
+                    <div class="relative">
+                        <input type="password" name="password" placeholder="••••••••"
+                            class="w-full px-4 py-3 pl-11 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 group-hover:border-blue-400"
+                            required autocomplete="current-password">
+                        <i class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <button type="button" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-600" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
                 </div>
 
-                <!-- ERROR -->
+                <!-- REMEMBER ME -->
+                <div class="flex items-center justify-between">
+                    <label class="flex items-center">
+                        <input type="checkbox" name="remember" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                        <span class="ml-2 text-sm text-gray-600">Ingat saya</span>
+                    </label>
+                    <a href="#" class="text-sm text-blue-600 hover:text-blue-800 hover:underline font-medium">
+                        Lupa password?
+                    </a>
+                </div>
+
+                <!-- ERROR MESSAGES -->
                 @error('email')
-                    <p class="text-red-500 text-sm">{{ $message }}</p>
+                    <div class="p-3 bg-red-50 border-l-4 border-red-500 rounded-r-lg animate-shake">
+                        <p class="text-red-700 text-sm font-medium flex items-center">
+                            <i class="fas fa-exclamation-circle mr-2"></i>{{ $message }}
+                        </p>
+                    </div>
+                @enderror
+
+                @error('password')
+                    <div class="p-3 bg-red-50 border-l-4 border-red-500 rounded-r-lg animate-shake">
+                        <p class="text-red-700 text-sm font-medium flex items-center">
+                            <i class="fas fa-exclamation-circle mr-2"></i>{{ $message }}
+                        </p>
+                    </div>
                 @enderror
 
                 <!-- BUTTON -->
-                <button
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg font-semibold transition">
-                    Login
+                <button type="submit"
+                    class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-3.5 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Masuk ke Dashboard
                 </button>
             </form>
 
-            <!-- REGISTER -->
-            <p class="text-center text-sm text-gray-600 mt-6">
-                Belum punya akun?
-                <a href="{{ route('admin.register') }}"
-                   class="text-blue-600 hover:underline font-semibold">
-                    Daftar
-                </a>
-            </p>
+            <!-- REGISTER LINK -->
+            <div class="mt-8 pt-6 border-t border-gray-200">
+                <p class="text-center text-gray-600 text-sm">
+                    Belum memiliki akun admin?
+                    <a href="{{ route('admin.register') }}"
+                       class="text-blue-600 hover:text-blue-800 font-bold hover:underline ml-1 transition-colors">
+                        Daftar Sekarang
+                        <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                    </a>
+                </p>
+            </div>
         </div>
 
         <!-- FOOTER -->
-        <p class="text-center text-xs text-gray-400 mt-6">
-            © {{ date('Y') }} Admin Panel
-        </p>
+        <div class="text-center mt-8">
+            <p class="text-sm text-gray-400 font-medium">
+                <i class="far fa-copyright mr-1"></i>© {{ date('Y') }} Admin Panel v2.0
+            </p>
+            <p class="text-xs text-gray-500 mt-2">
+                Dilindungi oleh keamanan terenkripsi
+                <i class="fas fa-shield-alt ml-1 text-green-500"></i>
+            </p>
+        </div>
     </div>
 
+    <!-- CUSTOM STYLES & SCRIPTS -->
+    <style>
+        @keyframes shake {
+            0%, 100% {transform: translateX(0);}
+            10%, 30%, 50%, 70%, 90% {transform: translateX(-5px);}
+            20%, 40%, 60%, 80% {transform: translateX(5px);}
+        }
+        .animate-shake {
+            animation: shake 0.5s ease-in-out;
+        }
+        .animate-pulse-slow {
+            animation: pulse 3s infinite;
+        }
+        input:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+    </style>
+
+    <script>
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.querySelector('input[name="password"]');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+
+        // Form validation animation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const inputs = this.querySelectorAll('input[required]');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.classList.add('border-red-500');
+                    setTimeout(() => input.classList.remove('border-red-500'), 1000);
+                }
+            });
+            
+            if (!isValid) {
+                e.preventDefault();
+                this.classList.add('animate-shake');
+                setTimeout(() => this.classList.remove('animate-shake'), 500);
+            }
+        });
+
+        // Auto remove error styling on input
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('border-red-500');
+            });
+        });
+    </script>
 </body>
 </html>

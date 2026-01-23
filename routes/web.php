@@ -5,6 +5,8 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\OutletController;
+use App\Http\Controllers\DashboardController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -45,17 +47,10 @@ Route::prefix('admin')
     ->middleware('auth:admin')
     ->group(function () {
 
-        // DASHBOARD ADMIN
-        Route::get('/dashboard', fn () => view('admin.dashboard'))
+        Route::get('/dashboard', [DashboardController::class, 'index'])
             ->name('dashboard');
 
-        // KATEGORI
         Route::resource('kategori', KategoriController::class);
-
-        // PRODUK
         Route::resource('produk', ProdukController::class);
+        Route::resource('outlet', OutletController::class);
     });
-
-       //OUTLET
-       Route::resource('outlet', OutletController::class)
-    ->names('admin.outlet');
