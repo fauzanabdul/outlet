@@ -10,9 +10,11 @@ class Outlet extends Model
     use HasFactory;
 
     protected $fillable = [
-        'gambar',
-        'nama_outlet',
-        'alamat',
-        'no_telp',
-    ];
+    'gambar',
+    'nama_outlet',
+    'alamat',
+    'no_telp',
+    'link_maps',
+];
+
 }

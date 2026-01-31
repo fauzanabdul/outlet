@@ -76,6 +76,22 @@
                    class="w-full border rounded p-2">
         </div>
 
+        <!-- LINK MAPS -->
+        <div>
+            <label class="block font-semibold mb-1">
+                Link Lokasi (Google Maps)
+            </label>
+            <input type="url"
+                name="link_maps"
+                value="{{ old('link_maps') }}"
+                placeholder="https://maps.google.com/..."
+                class="w-full border rounded p-2">
+            <small class="text-gray-500">
+                Opsional, isi link Google Maps outlet
+            </small>
+        </div>
+
+
         <!-- BUTTON -->
         <div class="flex justify-end gap-3 pt-4">
             <a href="{{ route('admin.outlet.index') }}"

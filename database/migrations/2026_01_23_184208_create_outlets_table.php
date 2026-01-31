@@ -8,14 +8,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('outlets', function (Blueprint $table) {
-            $table->id();
-            $table->string('gambar');        
-            $table->string('nama_outlet');   
-            $table->text('alamat');
-            $table->string('no_telp');
-            $table->timestamps();
-        });
+       Schema::create('outlets', function (Blueprint $table) {
+    $table->id();
+    $table->string('gambar');
+    $table->string('nama_outlet');
+    $table->text('alamat');
+    $table->string('no_telp');
+    $table->string('link_maps')->nullable();
+    $table->timestamps();
+});
+
     }
 
     public function down(): void

@@ -6,6 +6,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\OutletController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 
 
 /*
@@ -13,11 +14,9 @@ use App\Http\Controllers\DashboardController;
 | PUBLIC (USER)
 |--------------------------------------------------------------------------
 */
-Route::get('/', fn () => view('dashboard'))->name('home');
-Route::get('/produk', fn () => view('produk'));
-Route::get('/service', fn () => view('service'));
-Route::get('/outlet', fn () => view('outlet'));
-
+Route::get('/', [UserController::class, 'dashboard'])->name('dashboard');
+Route::get('/produk', [UserController::class, 'produk'])->name('produk');
+Route::get('/outlet', [UserController::class, 'outlet'])->name('outlet');
 /*
 |--------------------------------------------------------------------------
 | ADMIN AUTH (LOGIN, REGISTER, LOGOUT)

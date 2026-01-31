@@ -55,6 +55,22 @@
                    required>
         </div>
 
+        {{-- LINK MAPS --}}
+        <div class="mb-4">
+            <label class="block font-semibold mb-1">
+                Link Lokasi (Google Maps)
+            </label>
+            <input type="url"
+                name="link_maps"
+                value="{{ old('link_maps', $outlet->link_maps) }}"
+                class="w-full border p-2 rounded"
+                placeholder="https://maps.google.com/...">
+            <small class="text-gray-500">
+                Kosongkan jika tidak ada
+            </small>
+        </div>
+
+
         {{-- TOMBOL --}}
         <div class="flex gap-3">
             <button type="submit"

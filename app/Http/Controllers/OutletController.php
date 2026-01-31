@@ -9,7 +9,7 @@ class OutletController extends Controller
 {
     public function index()
     {
-        $outlets = Outlet::all();
+        $outlets = Outlet::paginate(10);
         return view('admin.outlet.index', compact('outlets'));
     }
 
@@ -25,18 +25,21 @@ class OutletController extends Controller
             'nama_outlet' => 'required',
             'alamat'      => 'required',
             'no_telp'     => 'required',
+            'link_maps'   => 'nullable|url', // 👈 tambahan
         ]);
+
 
         $gambar = $request->file('gambar');
         $namaGambar = time().'_'.$gambar->getClientOriginalName();
         $gambar->move(public_path('uploads/outlet'), $namaGambar);
 
         Outlet::create([
-            'gambar'      => $namaGambar,
-            'nama_outlet' => $request->nama_outlet,
-            'alamat'      => $request->alamat,
-            'no_telp'     => $request->no_telp,
-        ]);
+        'gambar'      => $namaGambar,
+        'nama_outlet' => $request->nama_outlet,
+        'alamat'      => $request->alamat,
+        'no_telp'     => $request->no_telp,
+        'link_maps'   => $request->link_maps, // 👈 tambahan
+    ]);
 
         return redirect()->route('admin.outlet.index')
             ->with('success', 'Outlet berhasil ditambahkan');
@@ -54,12 +57,14 @@ class OutletController extends Controller
     {
         $outlet = Outlet::findOrFail($id);
 
-        $request->validate([
-            'nama_outlet' => 'required',
-            'alamat'      => 'required',
-            'no_telp'     => 'required',
-            'gambar'      => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        ]);
+       $request->validate([
+        'nama_outlet' => 'required',
+        'alamat'      => 'required',
+        'no_telp'     => 'required',
+        'link_maps'   => 'nullable|url', // 👈 tambahan
+        'gambar'      => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
+
 
         if ($request->hasFile('gambar')) {
             if ($outlet->gambar && file_exists(public_path('uploads/outlet/'.$outlet->gambar))) {
@@ -73,11 +78,13 @@ class OutletController extends Controller
             $outlet->gambar = $namaGambar;
         }
 
-        $outlet->update([
+       $outlet->update([
             'nama_outlet' => $request->nama_outlet,
             'alamat'      => $request->alamat,
             'no_telp'     => $request->no_telp,
+            'link_maps'   => $request->link_maps, // 👈 tambahan
         ]);
+
 
         return redirect()->route('admin.outlet.index')
             ->with('success', 'Outlet berhasil diupdate');

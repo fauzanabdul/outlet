@@ -25,7 +25,8 @@ class ProdukController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
+            'nama_produk' => 'required',
+            'kategori_id' => 'required',
             'deskripsi' => 'required',
             'gambar' => 'required|image|mimes:jpg,png,jpeg'
         ]);
@@ -33,7 +34,8 @@ class ProdukController extends Controller
         $gambar = $request->file('gambar')->store('produk', 'public');
 
         Produk::create([
-            'nama' => $request->nama,
+            'nama_produk' => $request->nama_produk,
+            'kategori_id' => $request->kategori_id,
             'deskripsi' => $request->deskripsi,
             'gambar' => $gambar
         ]);
