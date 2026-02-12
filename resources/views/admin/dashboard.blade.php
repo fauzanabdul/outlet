@@ -107,7 +107,7 @@
                 <button type="submit"
                     class="flex items-center justify-center space-x-3 w-full p-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 rounded-lg transition-all duration-300">
                     <i class="fas fa-sign-out-alt"></i>
-                    <span>Keluar</span>
+                    <span>Logout</span>
                 </button>
             </form>
         </div>
@@ -125,9 +125,7 @@
                 <div class="flex items-center space-x-4">
                     <div class="relative">
                     </div>
-                    <div class="hidden md:block">
-                        <p class="font-medium">{{ now()->format('l, d F Y') }}</p>
-                    </div>
+                    
                 </div>
             </div>
         </header>
@@ -181,94 +179,7 @@
 
             <!-- Additional Content -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <!-- Recent Activity -->
-                <div class="bg-white rounded-xl shadow p-6">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-xl font-bold">Aktivitas Terbaru</h2>
-                        <a href="#" class="text-blue-600 text-sm font-medium">Lihat Semua</a>
-                    </div>
-                    
-                    <div class="space-y-4">
-                        <div class="flex items-start space-x-3 p-3 hover:bg-gray-50 rounded-lg">
-                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                                <i class="fas fa-plus text-blue-600"></i>
-                            </div>
-                            <div>
-                                <p class="font-medium">Produk baru ditambahkan</p>
-                                <p class="text-gray-500 text-sm">"Produk A" telah ditambahkan ke kategori elektronik</p>
-                                <p class="text-gray-400 text-xs mt-1">2 jam yang lalu</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start space-x-3 p-3 hover:bg-gray-50 rounded-lg">
-                            <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                                <i class="fas fa-edit text-green-600"></i>
-                            </div>
-                            <div>
-                                <p class="font-medium">Kategori diperbarui</p>
-                                <p class="text-gray-500 text-sm">Kategori "Pakaian" telah diperbarui</p>
-                                <p class="text-gray-400 text-xs mt-1">5 jam yang lalu</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start space-x-3 p-3 hover:bg-gray-50 rounded-lg">
-                            <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
-                                <i class="fas fa-store text-purple-600"></i>
-                            </div>
-                            <div>
-                                <p class="font-medium">Outlet baru terdaftar</p>
-                                <p class="text-gray-500 text-sm">Outlet "SITEPAT Cabang Surabaya" telah terdaftar</p>
-                                <p class="text-gray-400 text-xs mt-1">Kemarin, 14:30</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quick Actions -->
-                <div class="bg-white rounded-xl shadow p-6">
-                    <h2 class="text-xl font-bold mb-6">Aksi Cepat</h2>
-                    
-                    <div class="grid grid-cols-2 gap-4">
-                        <a href="{{ route('admin.produk.create') }}"
-                           class="bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 p-4 rounded-xl flex flex-col items-center justify-center hover:from-blue-100 hover:to-blue-200 transition">
-                            <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center mb-3">
-                                <i class="fas fa-plus text-white"></i>
-                            </div>
-                            <p class="font-medium text-center">Tambah Produk</p>
-                        </a>
-                        
-                        <a href="{{ route('admin.kategori.create') }}"
-                           class="bg-gradient-to-r from-green-50 to-green-100 border border-green-200 p-4 rounded-xl flex flex-col items-center justify-center hover:from-green-100 hover:to-green-200 transition">
-                            <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center mb-3">
-                                <i class="fas fa-folder-plus text-white"></i>
-                            </div>
-                            <p class="font-medium text-center">Tambah Kategori</p>
-                        </a>
-                        
-                        <a href="{{ route('admin.outlet.create') }}"
-                           class="bg-gradient-to-r from-purple-50 to-purple-100 border border-purple-200 p-4 rounded-xl flex flex-col items-center justify-center hover:from-purple-100 hover:to-purple-200 transition">
-                            <div class="w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center mb-3">
-                                <i class="fas fa-store-alt text-white"></i>
-                            </div>
-                            <p class="font-medium text-center">Tambah Outlet</p>
-                        </a>
-                        
-                        <a href="#"
-                           class="bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 p-4 rounded-xl flex flex-col items-center justify-center hover:from-orange-100 hover:to-orange-200 transition">
-                            <div class="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center mb-3">
-                                <i class="fas fa-chart-line text-white"></i>
-                            </div>
-                            <p class="font-medium text-center">Lihat Laporan</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Footer -->
-            <div class="mt-8 text-center text-gray-500 text-sm">
-                <p>© {{ date('Y') }} SITEPAT Admin Dashboard. Seluruh hak cipta dilindungi.</p>
-                <p class="mt-1">Versi 2.1.0 | Terakhir diperbarui: 15 Oktober 2023</p>
-            </div>
+                
         </div>
     </main>
 </div>

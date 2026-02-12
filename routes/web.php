@@ -17,6 +17,7 @@ use App\Http\Controllers\UserController;
 Route::get('/', [UserController::class, 'dashboard'])->name('dashboard');
 Route::get('/produk', [UserController::class, 'produk'])->name('produk');
 Route::get('/outlet', [UserController::class, 'outlet'])->name('outlet');
+Route::get('/kategori/{id}', [KategoriController::class, 'show']);
 /*
 |--------------------------------------------------------------------------
 | ADMIN AUTH (LOGIN, REGISTER, LOGOUT)
@@ -36,6 +37,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 });
 
+Route::get('/detail/produk/{id}', [ProdukController::class, 'detail'])
+    ->name('produk.detail');
+
 /*
 |--------------------------------------------------------------------------
 | ADMIN PROTECTED
@@ -52,4 +56,6 @@ Route::prefix('admin')
         Route::resource('kategori', KategoriController::class);
         Route::resource('produk', ProdukController::class);
         Route::resource('outlet', OutletController::class);
+        Route::resource('admin/kategori', KategoriController::class)->except('show');
+
     });

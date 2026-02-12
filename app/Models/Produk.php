@@ -11,11 +11,17 @@ class Produk extends Model
 
     protected $table = 'produks';
 
-protected $fillable = [
-    'nama_produk',
-    'kategori_id',
-    'deskripsi',
-    'gambar'
-];
+    protected $fillable = [
+        'nama_produk',
+        'kategori_id',
+        'deskripsi',
+        'gambar',
 
+    ];
+
+    // RELASI: Produk milik satu kategori
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'kategori_id');
+    }
 }
