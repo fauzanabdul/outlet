@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-    <title>SiTepat Premium • Digital Motoshop</title>
+    <title>Outlet Premium • Digital Motoshop</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -659,7 +659,7 @@
             </div>
             <div>
                 <h2 class="text-xl font-bold">
-                    <span class="text-white">Si</span><span class="gradient-text-premium">Tepat</span>
+                    <span class="gradient-text-premium">Outlet</span>
                 </h2>
             </div>
         </div>
@@ -725,7 +725,7 @@
             </div>
             <div>
                 <h1 class="text-xl sm:text-2xl font-bold tracking-tight">
-                    <span class="text-white">Si</span><span class="gradient-text-premium">Tepat</span>
+                    <span class="gradient-text-premium">Outlet</span>
                 </h1>
                 <p class="text-[10px] sm:text-xs text-gray-400 tracking-wider hidden xs:block">DIGITAL MOTOSHOP</p>
             </div>
@@ -862,9 +862,9 @@
 <section class="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 relative">
     <div class="container-responsive">
         <div class="text-center mb-8 sm:mb-10 lg:mb-12">
-            <span class="text-blue-400 font-semibold text-xs sm:text-sm tracking-wider uppercase">Premium Collection</span>
+           
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 mt-2">
-                Produk <span class="gradient-text-premium">Terpopuler</span>
+                Produk <span class="gradient-text-premium">Kami</span>
             </h2>
             <p class="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">
                 Pilihan terbaik dari brand ternama dengan kualitas dan performa terbaik
@@ -880,8 +880,8 @@
                          alt="{{ $produk->nama_produk }}"
                          class="w-full h-48 sm:h-56 object-cover"
                          loading="lazy">
-                    <div class="absolute top-3 right-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-2 py-1 rounded-full text-[10px] sm:text-xs font-semibold">
-                        NEW
+                    <div class="absolute top-3 right-3 text-white px-2 py-1 rounded-full text-[10px] sm:text-xs font-semibold">
+                    
                     </div>
                 </div>
                 
@@ -891,115 +891,33 @@
                         <h3 class="text-lg sm:text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
                             {{ $produk->nama_produk }}
                         </h3>
-                        <div class="flex items-center gap-0.5">
-                            <i class="fas fa-star text-yellow-400 text-[10px] sm:text-xs"></i>
-                            <i class="fas fa-star text-yellow-400 text-[10px] sm:text-xs"></i>
-                            <i class="fas fa-star text-yellow-400 text-[10px] sm:text-xs"></i>
-                            <i class="fas fa-star text-yellow-400 text-[10px] sm:text-xs"></i>
-                            <i class="fas fa-star text-yellow-400 text-[10px] sm:text-xs"></i>
-                        </div>
                     </div>
-                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                        {{ Str::limit($produk->deskripsi, 70) }}
-                    </p>
                 </div>
                 
                 <!-- Price & CTA -->
                 <div class="flex items-center justify-between mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-white/5">
                     <div>
-                        <span class="text-[10px] sm:text-xs text-gray-500">Mulai dari</span>
-                        <p class="text-lg sm:text-xl font-bold text-white">Rp 2.499K</p>
+                        
                     </div>
-                    <a href="{{ route('produk.detail', $produk->id) }}"
+                    <a href="{{ route('produk.kategori', $produk->id) }}"
                        class="btn-gradient text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl font-medium transition-all flex items-center space-x-1 sm:space-x-2 text-xs sm:text-sm">
                         <i class="fas fa-eye"></i>
-                        <span>Detail</span>
+                        <span>Lihat Produk</span>
                     </a>
                 </div>
             </div>
             @endforeach
         </div>
         
-        <div class="text-center mt-8 sm:mt-10 lg:mt-12">
-            <a href="{{ route('produk') }}" 
-               class="inline-flex items-center space-x-2 text-white bg-white/5 hover:bg-white/10 px-6 sm:px-8 py-3 sm:py-4 rounded-xl transition-all group text-sm sm:text-base">
-                <span>Lihat Semua Produk</span>
-                <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
-            </a>
-        </div>
+        
     </div>
 </section>
 
-<!-- FEATURES SECTION DARK - RESPONSIF -->
-<section class="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 relative">
-    <div class="absolute inset-0 bg-gradient-to-b from-blue-600/5 via-transparent to-transparent pointer-events-none"></div>
-    <div class="container-responsive relative z-10">
-        <div class="text-center mb-8 sm:mb-10 lg:mb-12">
-            <span class="text-emerald-400 font-semibold text-xs sm:text-sm tracking-wider uppercase">Mengapa Kami</span>
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 mt-2">
-                Keunggulan <span class="gradient-text-premium">SiTepat</span>
-            </h2>
-            <p class="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">
-                Layanan premium dengan kualitas terbaik untuk kepuasan Anda
-            </p>
+
         </div>
         
         <div class="grid-features">
-            <!-- Feature 1 -->
-            <div class="glass-card p-6 sm:p-8 rounded-xl sm:rounded-2xl text-center group">
-                <div class="feature-icon mx-auto mb-4 sm:mb-5">
-                    <i class="fas fa-shipping-fast text-2xl sm:text-3xl text-blue-400"></i>
-                </div>
-                <h4 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white">Gratis Ongkir</h4>
-                <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                    Minimal belanja Rp 500K, area Jabodetabek
-                </p>
-                <div class="mt-3 sm:mt-4 text-xs text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                    + Syarat & ketentuan
-                </div>
-            </div>
-            
-            <!-- Feature 2 -->
-            <div class="glass-card p-6 sm:p-8 rounded-xl sm:rounded-2xl text-center group">
-                <div class="feature-icon mx-auto mb-4 sm:mb-5">
-                    <i class="fas fa-shield-alt text-2xl sm:text-3xl text-purple-400"></i>
-                </div>
-                <h4 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white">Garansi Resmi</h4>
-                <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                    Garansi resmi 1 tahun untuk semua produk
-                </p>
-                <div class="mt-3 sm:mt-4 text-xs text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                    * Syarat & ketentuan
-                </div>
-            </div>
-            
-            <!-- Feature 3 -->
-            <div class="glass-card p-6 sm:p-8 rounded-xl sm:rounded-2xl text-center group">
-                <div class="feature-icon mx-auto mb-4 sm:mb-5">
-                    <i class="fas fa-headset text-2xl sm:text-3xl text-emerald-400"></i>
-                </div>
-                <h4 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white">Support 24/7</h4>
-                <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                    Tim CS siap membantu Anda kapan saja
-                </p>
-                <div class="mt-3 sm:mt-4 text-xs text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                    ⚡ Response &lt; 5 menit
-                </div>
-            </div>
-            
-            <!-- Feature 4 -->
-            <div class="glass-card p-6 sm:p-8 rounded-xl sm:rounded-2xl text-center group">
-                <div class="feature-icon mx-auto mb-4 sm:mb-5">
-                    <i class="fas fa-store text-2xl sm:text-3xl text-amber-400"></i>
-                </div>
-                <h4 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white">15+ Outlet</h4>
-                <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                    Tersebar di Jabodetabek, siap melayani Anda
-                </p>
-                <div class="mt-3 sm:mt-4 text-xs text-amber-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                    📍 Cek lokasi terdekat
-                </div>
-            </div>
+           
         </div>
     </div>
 </section>

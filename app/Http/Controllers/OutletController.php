@@ -9,7 +9,7 @@ class OutletController extends Controller
 {
     public function index()
     {
-       $outlets = Outlet::all();
+      $outlets = Outlet::latest()->paginate(10); // ← pakai paginate
         return view('admin.outlet.index', compact('outlets'));
     }
 

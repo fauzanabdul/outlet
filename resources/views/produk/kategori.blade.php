@@ -78,7 +78,6 @@
                 <div>
                     <h1 class="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
                         <span class="text-primary">
-                            <i class="fas fa-tags"></i>
                         </span>
                         {{ $kategori->nama_kategori }}
                     </h1>
@@ -92,8 +91,6 @@
             <div class="flex items-center gap-4">
                 <a href="{{ route('dashboard') }}"
                    class="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-200 text-sm font-medium">
-                    <i class="fas fa-home"></i>
-                    Beranda
                 </a>
             </div>
         </div>

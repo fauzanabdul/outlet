@@ -14,11 +14,14 @@ class ProdukController extends Controller
 
     // Tampilkan semua produk (admin)
     public function index()
-    {
-        return view('admin.produk.index', [
-            'produks' => Produk::with('kategori')->latest()->get()
-        ]);
-    }
+{
+    $produks = Produk::with('kategori')
+                ->latest()
+                ->paginate(10); 
+
+    return view('admin.produk.index', compact('produks'));
+}
+
 
     // Form tambah produk
     public function create()
@@ -94,6 +97,14 @@ class ProdukController extends Controller
 
         return back()->with('success', 'Produk berhasil dihapus');
     }
+
+
+    public function show($id)
+{
+    $produk = Produk::with('kategori')->findOrFail($id);
+
+    return view('produk.detail', compact('produk'));
+}
 
     /* =======================
      * PUBLIC AREA
