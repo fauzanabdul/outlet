@@ -2,111 +2,170 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Tambah Outlet</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <title>Tambah Outlet - Admin Panel</title>
 
-<div class="w-full max-w-xl bg-white p-6 rounded shadow">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                        },
+                        secondary: {
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen flex items-center justify-center">
+
+<div class="w-full max-w-2xl p-4">
 
     <!-- HEADER -->
-    <div class="flex items-center justify-between mb-6">
-        <h1 class="text-xl font-bold">Tambah Outlet</h1>
-
+    <div class="flex items-center gap-4 mb-6">
         <a href="{{ route('admin.outlet.index') }}"
-           class="text-sm bg-gray-700 text-white px-3 py-2 rounded hover:bg-gray-800">
-            ⬅ Kembali
+           class="bg-white hover:bg-primary-50 px-5 py-3 rounded-xl transition
+                  flex items-center gap-3 shadow border border-slate-200
+                  hover:border-primary-200">
+            ⬅ <span class="font-medium text-slate-700">Kembali</span>
         </a>
+
+        <div>
+            <h1 class="text-2xl font-bold text-slate-800">
+                <span class="bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent">
+                    Tambah Outlet
+                </span>
+            </h1>
+            <p class="text-slate-500 text-sm mt-1">
+                Tambahkan outlet baru ke dalam sistem
+            </p>
+        </div>
     </div>
 
-    <!-- ERROR VALIDASI -->
-    @if ($errors->any())
-        <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
-            <ul class="list-disc list-inside">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    <!-- CARD -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
 
-    <!-- FORM -->
-    <form action="{{ route('admin.outlet.store') }}"
-          method="POST"
-          enctype="multipart/form-data"
-          class="space-y-4">
-
-        @csrf
-
-        <!-- GAMBAR -->
-        <div>
-            <label class="block font-semibold mb-1">Gambar Outlet</label>
-            <input type="file"
-                   name="gambar"
-                   required
-                   class="w-full border rounded p-2">
+        <!-- CARD HEADER -->
+        <div class="p-6 border-b border-slate-200 bg-slate-50">
+            <h2 class="text-lg font-semibold text-slate-800">
+                Form Tambah Outlet
+            </h2>
         </div>
 
-        <!-- NAMA OUTLET -->
-        <div>
-            <label class="block font-semibold mb-1">Nama Outlet</label>
-            <input type="text"
-                   name="nama_outlet"
-                   value="{{ old('nama_outlet') }}"
-                   required
-                   class="w-full border rounded p-2">
-        </div>
+        <!-- ERROR -->
+        @if ($errors->any())
+            <div class="mx-6 mt-6 bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg">
+                <ul class="list-disc list-inside text-sm space-y-1">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
-        <!-- ALAMAT -->
-        <div>
-            <label class="block font-semibold mb-1">Alamat</label>
-            <textarea name="alamat"
-                      rows="3"
-                      required
-                      class="w-full border rounded p-2">{{ old('alamat') }}</textarea>
-        </div>
+        <!-- FORM -->
+        <form action="{{ route('admin.outlet.store') }}"
+              method="POST"
+              enctype="multipart/form-data"
+              class="p-6 space-y-6">
 
-        <!-- NO TELP -->
-        <div>
-            <label class="block font-semibold mb-1">No Telp</label>
-            <input type="text"
-                   name="no_telp"
-                   value="{{ old('no_telp') }}"
-                   required
-                   class="w-full border rounded p-2">
-        </div>
+            @csrf
 
-        <!-- LINK MAPS -->
-        <div>
-            <label class="block font-semibold mb-1">
-                Link Lokasi (Google Maps)
-            </label>
-            <input type="url"
-                name="link_maps"
-                value="{{ old('link_maps') }}"
-                placeholder="https://maps.google.com/..."
-                class="w-full border rounded p-2">
-            <small class="text-gray-500">
-                Opsional, isi link Google Maps outlet
-            </small>
-        </div>
+            <!-- GAMBAR -->
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">
+                    Gambar Outlet
+                </label>
+                <input type="file"
+                       name="gambar"
+                       required
+                       class="w-full border border-slate-300 rounded-xl px-4 py-3
+                              focus:outline-none focus:ring-2 focus:ring-primary-500 transition">
+            </div>
 
+            <!-- NAMA OUTLET -->
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">
+                    Nama Outlet
+                </label>
+                <input type="text"
+                       name="nama_outlet"
+                       value="{{ old('nama_outlet') }}"
+                       required
+                       class="w-full border border-slate-300 rounded-xl px-4 py-3
+                              focus:outline-none focus:ring-2 focus:ring-primary-500 transition">
+            </div>
 
-        <!-- BUTTON -->
-        <div class="flex justify-end gap-3 pt-4">
-            <a href="{{ route('admin.outlet.index') }}"
-               class="px-4 py-2 rounded bg-gray-500 text-white hover:bg-gray-600">
-                Batal
-            </a>
+            <!-- ALAMAT -->
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">
+                    Alamat
+                </label>
+                <textarea name="alamat"
+                          rows="3"
+                          required
+                          class="w-full border border-slate-300 rounded-xl px-4 py-3
+                                 focus:outline-none focus:ring-2 focus:ring-primary-500 transition">{{ old('alamat') }}</textarea>
+            </div>
 
-            <button type="submit"
-                    class="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700">
-                Simpan Outlet
-            </button>
-        </div>
+            <!-- NO TELP -->
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">
+                    No Telp
+                </label>
+                <input type="text"
+                       name="no_telp"
+                       value="{{ old('no_telp') }}"
+                       required
+                       class="w-full border border-slate-300 rounded-xl px-4 py-3
+                              focus:outline-none focus:ring-2 focus:ring-primary-500 transition">
+            </div>
 
-    </form>
+            <!-- LINK MAPS -->
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">
+                    Link Lokasi (Google Maps)
+                </label>
+                <input type="url"
+                       name="link_maps"
+                       value="{{ old('link_maps') }}"
+                       placeholder="https://maps.google.com/..."
+                       class="w-full border border-slate-300 rounded-xl px-4 py-3
+                              focus:outline-none focus:ring-2 focus:ring-primary-500 transition">
+                <p class="text-xs text-slate-500 mt-2">
+                    Opsional, isi link Google Maps outlet
+                </p>
+            </div>
 
+            <!-- BUTTON -->
+            <div class="flex gap-4 pt-4 border-t border-slate-200">
+                <a href="{{ route('admin.outlet.index') }}"
+                   class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700
+                          px-6 py-3 rounded-xl font-semibold transition text-center">
+                    Batal
+                </a>
+
+                <button type="submit"
+                        class="flex-1 bg-gradient-to-r from-primary-500 to-primary-600
+                               hover:from-primary-600 hover:to-primary-700 text-white
+                               px-6 py-3 rounded-xl font-semibold transition shadow-md">
+                    Simpan Outlet
+                </button>
+            </div>
+
+        </form>
+    </div>
 </div>
 
 </body>

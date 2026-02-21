@@ -9,9 +9,20 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminAuthController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | ====================== WEB SECTION ======================
+    |--------------------------------------------------------------------------
+    */
+
     public function showLogin()
     {
         return view('admin.login');
+    }
+
+    public function showRegister()
+    {
+        return view('admin.register');
     }
 
     public function login(Request $request)
@@ -31,44 +42,48 @@ class AdminAuthController extends Controller
         ]);
     }
 
+    
+
     public function dashboard()
     {
         return view('admin.dashboard');
     }
 
-    public function showRegister()
+    public function logout(Request $request)
     {
-        return view('admin.register');
+        Auth::guard('admin')->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/')->with('success', 'Berhasil logout');
     }
 
-    public function register(Request $request)
+
+    /*
+    |--------------------------------------------------------------------------
+    | ====================== API SECTION ======================
+    |--------------------------------------------------------------------------
+    */
+
+    public function registerApi(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:100',
             'email' => 'required|email|unique:admins,email',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:6',
         ]);
 
-        Admin::create([
+        $admin = Admin::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('admin.login')
-            ->with('success', 'Akun admin berhasil dibuat, silakan login');
+        return response()->json([
+            'status' => true,
+            'message' => 'Admin berhasil dibuat',
+            'data' => $admin
+        ], 201);
     }
-
-    public function logout()
-{
-    Auth::guard('admin')->logout();
-
-    request()->session()->invalidate();
-    request()->session()->regenerateToken();
-
-    // ⬇️ ARAH KE resources/views/dashboard.blade.php
-    return redirect('/')
-        ->with('success', 'Berhasil logout');
-}
-
 }

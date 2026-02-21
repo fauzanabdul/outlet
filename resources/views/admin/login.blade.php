@@ -56,16 +56,7 @@
                     </div>
                 </div>
 
-                <!-- REMEMBER ME -->
-                <div class="flex items-center justify-between">
-                    <label class="flex items-center">
-                        <input type="checkbox" name="remember" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
-                        <span class="ml-2 text-sm text-gray-600">Ingat saya</span>
-                    </label>
-                    <a href="#" class="text-sm text-blue-600 hover:text-blue-800 hover:underline font-medium">
-                        Lupa password?
-                    </a>
-                </div>
+                
 
                 <!-- ERROR MESSAGES -->
                 @error('email')
@@ -87,34 +78,15 @@
                 <!-- BUTTON -->
                 <button type="submit"
                     class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-3.5 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0">
-                    <i class="fas fa-sign-in-alt mr-2"></i>Masuk ke Dashboard
+                   LOGIN
                 </button>
             </form>
 
-            <!-- REGISTER LINK -->
-            <div class="mt-8 pt-6 border-t border-gray-200">
-                <p class="text-center text-gray-600 text-sm">
-                    Belum memiliki akun admin?
-                    <a href="{{ route('admin.register') }}"
-                       class="text-blue-600 hover:text-blue-800 font-bold hover:underline ml-1 transition-colors">
-                        Daftar Sekarang
-                        <i class="fas fa-arrow-right ml-1 text-xs"></i>
-                    </a>
-                </p>
+           
             </div>
         </div>
 
-        <!-- FOOTER -->
-        <div class="text-center mt-8">
-            <p class="text-sm text-gray-400 font-medium">
-                <i class="far fa-copyright mr-1"></i>© {{ date('Y') }} Admin Panel v2.0
-            </p>
-            <p class="text-xs text-gray-500 mt-2">
-                Dilindungi oleh keamanan terenkripsi
-                <i class="fas fa-shield-alt ml-1 text-green-500"></i>
-            </p>
-        </div>
-    </div>
+        
 
     <!-- CUSTOM STYLES & SCRIPTS -->
     <style>
